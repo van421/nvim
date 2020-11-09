@@ -142,7 +142,7 @@ map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 " 打开或关闭拼写检查
 map <LEADER>sp :set spell!<CR>
 " 引入插件
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " 下方显示状态条
 Plug 'vim-airline/vim-airline'
@@ -159,10 +159,9 @@ Plug 'mbbill/undotree/'
 Plug 'ryanoasis/vim-devicons'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 " markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.vim', { 'do' : { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do' : { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on' : 'TableModeToggle' }
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'vimwiki/vimwiki'
@@ -218,7 +217,8 @@ nnoremap <leader>li :LeetCodeSignIn<cr>
 " ===
 " === Undotree
 " ===
-noremap L :UndotreeToggle<CR>
+let g:undotree_DiffAutoOpen = 0
+noremap U :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
@@ -298,8 +298,3 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-" ===
-" === Undotree
-" ===
-let g:undotree_DiffAutoOpen = 0
-map U :UndotreeToggle<CR>
