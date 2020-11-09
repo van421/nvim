@@ -101,10 +101,10 @@ map J 5j
 map K 5k
 
 " 分屏操作
-map <LEADER>h :set nosplitright<CR>:vsplit<CR>
-map <LEADER>l :set splitright<CR>:vsplit<CR>
-map <LEADER>j :set splitbelow<CR>:split<CR>
-map <LEADER>k :set nosplitbelow<CR>:split<CR>
+map <LEADER>h :set nosplitright<CR>:vsplit<CR>:e 
+map <LEADER>l :set splitright<CR>:vsplit<CR>:e 
+map <LEADER>j :set splitbelow<CR>:split<CR>:e 
+map <LEADER>k :set nosplitbelow<CR>:split<CR>:e 
 map fh <C-w>h
 map fl <C-w>l
 map fj <C-w>j
