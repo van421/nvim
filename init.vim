@@ -171,6 +171,19 @@ Plug 'ianding1/leetcode.vim'
 Plug 'kevinhwang91/rnvimr'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" wild-fire
+Plug 'gcmt/wildfire.vim'
+" vim-surround
+Plug 'tpope/vim-surround'
+" visincr
+Plug 'JikkuJose/vim-visincr'
+" 前端开发相关
+Plug 'pangloss/vim-javascript'
+Plug 'mattn/emmet-vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 call plug#end()
 
