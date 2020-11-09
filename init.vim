@@ -239,10 +239,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> n <plug>UndotreeNextState
-	nmap <buffer> p <plug>UndotreePreviousState
-	nmap <buffer> N 5<plug>UndotreeNextState
-	nmap <buffer> P 5<plug>UndotreePreviousState
+  nmap <buffer> n <plug>UndotreeNextState
+  nmap <buffer> p <plug>UndotreePreviousState
+  nmap <buffer> N 5<plug>UndotreeNextState
+  nmap <buffer> P 5<plug>UndotreePreviousState
 endfunc
 
 " markdown
@@ -267,10 +267,17 @@ autocmd Filetype markdown inoremap <buffer> <silent> ,2 ##<Space><Enter><++><Esc
 autocmd Filetype markdown inoremap <buffer> <silent> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,t <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-inoremap <buffer> <silent> <C-e> <Esc>$a
-inoremap <buffer> <silent> <C-a> <Esc>0i
-inoremap <buffer> <silent> <C-f> <Esc>la
-inoremap <buffer> <silent> <C-b> <Esc>ha
+
+" 插入模式下移动光标
+inoremap <C-e> <Esc>$a
+inoremap <C-a> <Esc>0i
+inoremap <C-f> <Esc>la
+inoremap <C-b> <Esc>ha
+inoremap <C-p> <Esc>ka
+inoremap <C-n> <Esc>ja
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
 
 " fzf plug
 noremap <C-s> :FZF<CR>
