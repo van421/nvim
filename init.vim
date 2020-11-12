@@ -181,12 +181,30 @@ Plug 'JikkuJose/vim-visincr'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'jelera/vim-javascript-syntax'
+" 需要手动安装 prettier: npm install prettier -g
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
+  \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'jiangmiao/auto-pairs'
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
+" vimwiki
+let g:vimwiki_list = [{
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '~/.config/nvim/vimwiki/wiki_html',
+  \ 'path': '~/vimwiki',
+  \ 'template_path': '~/.config/nvim/vimwiki/template/',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'template_default':'markdown',
+  \ 'custom_wiki2html': '~/.config/nvim/vimwiki/wiki2html.sh',
+  \ 'template_ext':'.html'
+\}]
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 " ===
 " === coc.nvim
 " ===
