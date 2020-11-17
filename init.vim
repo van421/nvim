@@ -17,6 +17,10 @@ let mapleader = " " " 终端特殊字符显示
 let &t_ut=''
 " 打开语法高亮 
 syntax on
+set re=1
+set lazyredraw
+set synmaxcol=128
+syntax sync minlines=256
 " 显示行号及相对行号
 set number
 set relativenumber
@@ -76,6 +80,8 @@ set foldlevel=99
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" 设置 ruby 路径
+let g:ruby_host_prog = '/usr/local/lib/ruby/gems/2.7.0/bin/neovim-ruby-host'
 " 总是显示状态行
 set laststatus=2
 " 设置上下 5 行的距离
@@ -151,14 +157,13 @@ Plug 'connorholyday/vim-snazzy'
 " 显示文件树
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" 语法检查
-Plug 'w0rp/ale'
 " Undo Tree
 Plug 'mbbill/undotree/'
 " vim-devicons
 Plug 'ryanoasis/vim-devicons'
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.nvim', { 'do' : { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
@@ -189,14 +194,34 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" 切换输入法
+Plug 'ybian/smartim'
 
 call plug#end()
 
-" vimwiki
+" ===
+" === smartim
+" ===
+let g:smartim_default = "com.apple.keylayout.ABC"
+
+" ===
+" === visual-multi
+" ===
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-k>'
+let g:VM_maps['Find Subword Under'] = '<C-k>'
+let g:VM_maps['Find Next'] = ''
+let g:VM_maps['Find Prev'] = ''
+let g:VM_maps['Remove Region'] = 'k'
+let g:VM_show_warnings = 0
+
+" ===
+" === vimwiki
+" ===
 let g:vimwiki_list = [{
   \ 'automatic_nested_syntaxes':1,
   \ 'path_html': '~/.config/nvim/vimwiki/wiki_html',
-  \ 'path': '~/vimwiki',
+  \ 'path': '~/Library/Mobile Documents/com\~apple\~CloudDocs/Notes/vimwiki',
   \ 'template_path': '~/.config/nvim/vimwiki/template/',
   \ 'syntax': 'markdown',
   \ 'ext':'.md',
@@ -204,13 +229,115 @@ let g:vimwiki_list = [{
   \ 'custom_wiki2html': '~/.config/nvim/vimwiki/wiki2html.sh',
   \ 'template_ext':'.html'
 \}]
-" airline
+
+" ===
+" === airline
+" ===
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
 " ===
 " === coc.nvim
 " ===
-let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-tsserver']
+let g:coc_global_extensions = [
+  \ 'coc-json',
+  \ 'coc-vimlsp',
+  \ 'coc-tsserver',
+  \ 'coc-css',
+  \ 'coc-html',
+  \ 'coc-actions',
+  \ 'coc-diagnostic',
+  \ 'coc-prettier',
+  \ 'coc-syntax',
+  \ 'coc-vetur',
+  \ 'coc-yaml',
+  \ 'coc-snippets',
+  \ 'coc-translator',
+  \ 'coc-tabnine']
+" 让 coc 在 neovim 启动后 500ms 再启动
+let g:coc_start_at_startup=0
+function! CocTimerStart(timer)
+    exec "CocStart"
+endfunction
+call timer_start(500,'CocTimerStart',{'repeat':1})
+"解决coc.nvim大文件卡死状况
+let g:trigger_size = 0.5 * 1048576
+
+augroup hugefile
+  autocmd!
+  autocmd BufReadPre *
+        \ let size = getfsize(expand('<afile>')) |
+        \ if (size > g:trigger_size) || (size == -2) |
+        \   echohl WarningMsg | echomsg 'WARNING: altering options for this huge file!' | echohl None |
+        \   exec 'CocDisable' |
+        \ else |
+        \   exec 'CocEnable' |
+        \ endif |
+        \ unlet size
+augroup END
+" 使用 tab 选择补全
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" 触发 coc 补全
+inoremap <silent><expr> <c-space> coc#refresh()
+" 使用 enter 选中补全
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use `<space>-` and `<space>+` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
+nmap <silent> <LEADER>+ <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use <space>h to show documentation in preview window.
+nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+" Highlight the symbol and its references when holding the cursor. not worked
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+function! s:cocActionOpenFromSeleted(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' .visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionOpenFromSeleted<CR>g@
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" coc translator
+nnoremap <LEADER>t :CocCommand translator.popup<CR>
+" snippets
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-e> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-p>'
+imap <C-e> <Plug>(coc-snippets-expand-jump)
+let g:snips_author = 'liufan'
 
 " ===
 " === rnvimr
@@ -235,10 +362,14 @@ let g:rnvimr_layout = { 'relative': 'editor',
             \ 'style': 'minimal' }
 let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
-" vim-table-mode
+" ===
+" === vim-table-mode
+" ===
 map <LEADER>tm :TableModeToggle<CR>
 
-" leetcode
+" ===
+" === leetcode
+" ===
 let g:leetcode_browser = "chrome"
 let g:leetcode_china = 1
 let g:leetcode_solution_filetype = "javascript"
@@ -265,9 +396,10 @@ function g:Undotree_CustomMap()
   nmap <buffer> P 5<plug>UndotreePreviousState
 endfunc
 
-" markdown
+" ===
+" === markdown-preview
+" ===
 let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
-" let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
 autocmd Filetype markdown map mp :MarkdownPreview<CR>
 autocmd Filetype markdown map mps :MarkdownPreviewStop<CR>
 autocmd Filetype markdown inoremap <buffer> <silent> ,, <++>
@@ -299,11 +431,15 @@ inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
 
-" fzf plug
+" ===
+" === fzf
+" ===
 noremap <C-s> :FZF<CR>
 noremap <C-f> :Ag<CR>
 
-" snazzy 配置
+" ===
+" === snazzy
+" ===
 let g:SnazzyTransparent = 1
 colorscheme snazzy
 
