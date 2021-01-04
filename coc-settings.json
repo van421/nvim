@@ -40,7 +40,7 @@
   "diagnostic.virtualTextPrefix": " ❯❯❯ ",
   "diagnostic.virtualText": true,
   "codeLens.enable": true,
-  "coc.preferences.formatOnSaveFiletypes": ["json"],
+  "coc.preferences.formatOnSaveFiletypes": ["json", "js"],
   "snippets.ultisnips.directories": [
     "UltiSnips",
     "$Home/.config/nvim/UltiSnips/",
