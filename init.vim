@@ -186,10 +186,6 @@ Plug 'JikkuJose/vim-visincr'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'jelera/vim-javascript-syntax'
-" 需要手动安装 prettier: npm install prettier -g
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
