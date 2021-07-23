@@ -15,7 +15,7 @@ endif
 " 将 leader 键映射到空格键上
 let mapleader = " " " 终端特殊字符显示
 let &t_ut=''
-" 打开语法高亮 
+" 打开语法高亮
 syntax on
 set re=1
 set lazyredraw
@@ -32,7 +32,7 @@ set wrap
 set showcmd
 " 自动补全命令时候使用菜单式匹配列表
 set wildmenu
-" 高亮搜索结果 
+" 高亮搜索结果
 set hlsearch
 " 重新打开文件时删除所有高亮搜索结果
 exec "nohlsearch"
