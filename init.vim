@@ -107,10 +107,10 @@ map J 5j
 map K 5k
 
 " 分屏操作
-map <LEADER>h :set nosplitright<CR>:vsplit<CR>:e 
-map <LEADER>l :set splitright<CR>:vsplit<CR>:e 
-map <LEADER>j :set splitbelow<CR>:split<CR>:e 
-map <LEADER>k :set nosplitbelow<CR>:split<CR>:e 
+map <LEADER>h :set nosplitright<CR>:vsplit<CR>:e
+map <LEADER>l :set splitright<CR>:vsplit<CR>:e
+map <LEADER>j :set splitbelow<CR>:split<CR>:e
+map <LEADER>k :set nosplitbelow<CR>:split<CR>:e
 map fh <C-w>h
 map fl <C-w>l
 map fj <C-w>j
@@ -121,7 +121,7 @@ map sh <C-w>t<C-w>K
 
 " 窗口对比
 map <LEADER>di :windo difft<CR>
-map <LEADER>df :vert diffsplit 
+map <LEADER>df :vert diffsplit
 
 " tab 相关操作
 map ta :tabe<CR>
