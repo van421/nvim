@@ -7,7 +7,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-
 " ===
 " === All vim config
 " ===
@@ -152,6 +151,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " 下方显示状态条
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " 安装 snazzy 主题
 Plug 'connorholyday/vim-snazzy'
 " 显示文件树
@@ -166,10 +166,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.nvim', { 'do' : { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do' : { -> mkdp#util#install() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on' : 'TableModeToggle' }
 Plug 'mzlogin/vim-markdown-toc'
-Plug 'vimwiki/vimwiki'
+"Plug 'godlygeek/tabular'
+"Plug 'preservim/vim-markdown'
+"Plug 'vimwiki/vimwiki'
 " leetcode
 Plug 'ianding1/leetcode.vim'
 " rnvimr
@@ -192,6 +194,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " 切换输入法
 Plug 'ybian/smartim'
+" 嵌套括号高亮
+Plug 'luochen1990/rainbow'
 
 call plug#end()
 
@@ -212,7 +216,7 @@ let g:VM_maps['Remove Region'] = 'k'
 let g:VM_show_warnings = 0
 
 " ===
-" === vimwiki
+" === vimwiki (delete for temporary)
 " ===
 let g:vimwiki_list = [{
   \ 'automatic_nested_syntaxes':1,
@@ -231,6 +235,7 @@ let g:vimwiki_list = [{
 " ===
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme = 'simple'
 
 " ===
 " === coc.nvim
@@ -245,10 +250,13 @@ let g:coc_global_extensions = [
   \ 'coc-diagnostic',
   \ 'coc-prettier',
   \ 'coc-syntax',
-  \ 'coc-vetur',
   \ 'coc-yaml',
   \ 'coc-snippets',
   \ 'coc-translator',
+  \ 'coc-marketplace',
+  \ 'coc-markdownlint',
+  \ 'coc-pairs',
+  \ 'coc-highlight',
   \ 'coc-tabnine']
 " 让 coc 在 neovim 启动后 500ms 再启动
 let g:coc_start_at_startup=0
@@ -395,7 +403,8 @@ endfunc
 " ===
 " === markdown-preview
 " ===
-let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
+" let g:mkdp_path_to_chrome = "open -a Safari"
+let g:mkdp_echo_preview_url = 1
 autocmd Filetype markdown map mp :MarkdownPreview<CR>
 autocmd Filetype markdown map mps :MarkdownPreviewStop<CR>
 autocmd Filetype markdown inoremap <buffer> <silent> ,, <++>
@@ -408,6 +417,7 @@ autocmd Filetype markdown inoremap <buffer> <silent> ,q `` <++><Esc>F`i
 autocmd Filetype markdown inoremap <buffer> <silent> ,c ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,g - [ ] <Enter><++><ESC>kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,u <u></u><++><Esc>F/hi
+autocmd Filetype markdown inoremap <buffer> <silent> ,k <kbd></kbd><++><Esc>F/hi
 autocmd Filetype markdown inoremap <buffer> <silent> ,p ![](<++>) <++><Esc>F[a
 autocmd Filetype markdown inoremap <buffer> <silent> ,a [](<++>) <++><Esc>F[a
 autocmd Filetype markdown inoremap <buffer> <silent> ,1 #<Space><Enter><++><Esc>kA
@@ -458,7 +468,7 @@ let NERDTreeMapChangeRoot = "y"
 " == NERDTree-git
 " ==
 let g:NERDTreeGitStatusUseNerdFonts = 1
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -470,3 +480,33 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+" ==
+" == rainbow
+" ==
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'guifgs': ['darkorange3', 'seagreen3', 'royalblue3', 'firebrick'],
+\   'ctermfgs': ['lightyellow', 'lightcyan','lightblue', 'lightmagenta'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['darkorange3', 'seagreen3', 'royalblue3', 'firebrick'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\   }
+\}
+
+" 设置 ruby 和 perl 语言的支持
+let g:ruby_host_prog = "/usr/local/lib/ruby/gems/3.1.0/bin/neovim-ruby-host"
+let g:loaded_perl_provider = 0
