@@ -49,6 +49,9 @@
     "no-inline-html": {
       "allowed_elements": ["kbd"]
     },
-    "line_length": false
+    "line_length": false,
+    "no-duplicate-heading": {
+      "siblings_only": true
+    }
   }
 }

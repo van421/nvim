@@ -403,7 +403,12 @@ endfunc
 " ===
 " === markdown-preview
 " ===
-" let g:mkdp_path_to_chrome = "open -a Safari"
+"function! g:OpenNewWindow(url)
+    "silent exe 'silent !open -na "Google Chrome" ' . a:url
+"endfunction
+"let g:mkdp_browserfunc = 'g:OpenNewWindow'
+let g:mkdp_browser = 'Google Chrome'
+"let g:mkdp_path_to_chrome = "open -a Google Chrome"
 let g:mkdp_echo_preview_url = 1
 autocmd Filetype markdown map mp :MarkdownPreview<CR>
 autocmd Filetype markdown map mps :MarkdownPreviewStop<CR>
@@ -425,6 +430,8 @@ autocmd Filetype markdown inoremap <buffer> <silent> ,2 ##<Space><Enter><++><Esc
 autocmd Filetype markdown inoremap <buffer> <silent> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> <silent> ,t <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+autocmd Filetype markdown inoremap <buffer> <silent> ,d <C-R>=strftime("%Y-%m-%d")<CR>
+autocmd Filetype markdown inoremap <buffer> <silent> ,w <C-R>=strftime("%Y-week%V")<CR>
 
 " 插入模式下移动光标
 inoremap <C-e> <Esc>$a
@@ -509,4 +516,4 @@ let g:rainbow_conf = {
 
 " 设置 ruby 和 perl 语言的支持
 let g:ruby_host_prog = "/usr/local/lib/ruby/gems/3.1.0/bin/neovim-ruby-host"
-let g:loaded_perl_provider = 0
+"let g:loaded_perl_provider = 0
