@@ -146,6 +146,10 @@ map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 
 " 打开或关闭拼写检查
 map <LEADER>sp :set spell!<CR>
+
+" 快速查找 visual 模式下选中的字符串
+vnoremap // y/<C-r>"<CR>
+
 " 引入插件
 call plug#begin('~/.config/nvim/plugged')
 
