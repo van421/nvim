@@ -200,6 +200,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ybian/smartim'
 " 嵌套括号高亮
 Plug 'luochen1990/rainbow'
+" 运行代码片段
+Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 
 call plug#end()
 
@@ -517,6 +519,13 @@ let g:rainbow_conf = {
 \       'css': 0,
 \   }
 \}
+
+" ==
+" == sniprun
+" ==
+map <LEADER>r <Plug>SnipRun
+map <LEADER>rw ggvG<Plug>SnipRun
+map <LEADER>rc <Plug>SnipClose
 
 " 设置 ruby 和 perl 语言的支持
 let g:ruby_host_prog = "/usr/local/lib/ruby/gems/3.1.0/bin/neovim-ruby-host"
