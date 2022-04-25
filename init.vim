@@ -221,6 +221,12 @@ Plug 'meain/vim-printer'
 call plug#end()
 
 " ===
+" === wildfire
+" ===
+" :help text-objects 查看可以添加的项
+let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it", "i>"]
+
+" ===
 " === tabular
 " ===
 if exists(":Tabularize")
