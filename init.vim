@@ -215,6 +215,8 @@ if exists(":Tabularize")
   vmap <LEADER>a= :Tabularize /=<CR>
   nmap <LEADER>a: :Tabularize /:\zs<CR>
   vmap <LEADER>a: :Tabularize /:\zs<CR>
+endif
+
 " ===
 " === smartim
 " ===
@@ -223,13 +225,13 @@ let g:smartim_default = "com.apple.keylayout.ABC"
 " ===
 " === visual-multi
 " ===
-let g:VM_maps = {}
+let g:VM_maps                       = {}
 let g:VM_maps['Find Under']         = '<C-k>'
 let g:VM_maps['Find Subword Under'] = '<C-k>'
-let g:VM_maps['Find Next'] = ''
-let g:VM_maps['Find Prev'] = ''
-let g:VM_maps['Remove Region'] = 'k'
-let g:VM_show_warnings = 0
+let g:VM_maps['Find Next']          = ''
+let g:VM_maps['Find Prev']          = ''
+let g:VM_maps['Remove Region']      = 'k'
+let g:VM_show_warnings              = 0
 
 " ===
 " === vimwiki (delete for temporary)
@@ -249,9 +251,9 @@ let g:vimwiki_list = [{
 " ===
 " === airline
 " ===
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled        = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme = 'simple'
+let g:airline_theme                             = 'simple'
 
 " ===
 " === coc.nvim
@@ -362,7 +364,7 @@ let g:snips_author = 'liufan'
 " ===
 " === rnvimr
 " ===
-let g:rnvimr_ex_enable = 1
+let g:rnvimr_ex_enable   = 1
 let g:rnvimr_pick_enable = 1
 let g:rnvimr_draw_border = 0
 " let g:rnvimr_bw_enable = 1
@@ -390,8 +392,8 @@ map <LEADER>tm :TableModeToggle<CR>
 " ===
 " === leetcode
 " ===
-let g:leetcode_browser = "chrome"
-let g:leetcode_china = 1
+let g:leetcode_browser           = "chrome"
+let g:leetcode_china             = 1
 let g:leetcode_solution_filetype = "javascript"
 nnoremap <leader>ll :LeetCodeList<cr>
 nnoremap <leader>lt :LeetCodeTest<cr>
@@ -401,14 +403,14 @@ nnoremap <leader>li :LeetCodeSignIn<cr>
 " ===
 " === Undotree
 " ===
-let g:undotree_DiffAutoOpen = 0
+let g:undotree_DiffAutoOpen       = 0
 noremap U :UndotreeToggle<CR>
-let g:undotree_DiffAutoOpen = 1
+let g:undotree_DiffAutoOpen       = 1
 let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_ShortIndicators = 1
-let g:undotree_WindowLayout = 2
-let g:undotree_DiffpanelHeight = 8
-let g:undotree_SplitWidth = 24
+let g:undotree_ShortIndicators    = 1
+let g:undotree_WindowLayout       = 2
+let g:undotree_DiffpanelHeight    = 8
+let g:undotree_SplitWidth         = 24
 function g:Undotree_CustomMap()
   nmap <buffer> n <plug>UndotreeNextState
   nmap <buffer> p <plug>UndotreePreviousState
@@ -476,21 +478,21 @@ colorscheme snazzy
 " === NERDTree
 " ===
 map ff :NERDTreeToggle<CR>
-let NERDTreeMapOpenExpl = ""
-let NERDTreeMapUpdir = ""
+let NERDTreeMapOpenExpl      = ""
+let NERDTreeMapUpdir         = ""
 let NERDTreeMapUpdirKeepOpen = "l"
-let NERDTreeMapOpenSplit = ""
-let NERDTreeOpenVSplit = ""
-let NERDTreeMapActivateNode = "i"
-let NERDTreeMapOpenInTab = "o"
-let NERDTreeMapPreview = ""
-let NERDTreeMapCloseDir = "n"
-let NERDTreeMapChangeRoot = "y"
+let NERDTreeMapOpenSplit     = ""
+let NERDTreeOpenVSplit       = ""
+let NERDTreeMapActivateNode  = "i"
+let NERDTreeMapOpenInTab     = "o"
+let NERDTreeMapPreview       = ""
+let NERDTreeMapCloseDir      = "n"
+let NERDTreeMapChangeRoot    = "y"
 
 " ==
 " == NERDTree-git
 " ==
-let g:NERDTreeGitStatusUseNerdFonts = 1
+let g:NERDTreeGitStatusUseNerdFonts       = 1
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -507,7 +509,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " == rainbow
 " ==
 let g:rainbow_active = 1
-let g:rainbow_conf = {
+let g:rainbow_conf   = {
 \   'guifgs': ['darkorange3', 'seagreen3', 'royalblue3', 'firebrick'],
 \   'ctermfgs': ['lightyellow', 'lightcyan','lightblue', 'lightmagenta'],
 \   'operators': '_,_',
