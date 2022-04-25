@@ -157,6 +157,12 @@ map P ddkkp
 "vmap N dp
 "vmap P dkkp
 
+" tab 缩进
+nmap <tab> V>
+nmap <s-tab> V<
+vmap <tab> >gv
+vmap <s-tab> <gv
+
 " 引入插件
 call plug#begin('~/.config/nvim/plugged')
 
