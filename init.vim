@@ -202,6 +202,8 @@ Plug 'ybian/smartim'
 Plug 'luochen1990/rainbow'
 " 运行代码片段
 Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+" 打印变量
+Plug 'meain/vim-printer'
 
 call plug#end()
 
@@ -526,6 +528,12 @@ let g:rainbow_conf = {
 map <LEADER>r <Plug>SnipRun
 map <LEADER>rw ggvG<Plug>SnipRun
 map <LEADER>rc <Plug>SnipClose
+
+" ==
+" == vim-printer
+" ==
+let g:vim_printer_print_below_keybinding = '<LEADER>p'
+let g:vim_printer_print_above_keybinding = '<LEADER>P'
 
 " 设置 ruby 和 perl 语言的支持
 let g:ruby_host_prog = "/usr/local/lib/ruby/gems/3.1.0/bin/neovim-ruby-host"
