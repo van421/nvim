@@ -150,6 +150,13 @@ map <LEADER>sp :set spell!<CR>
 " 快速查找 visual 模式下选中的字符串
 vnoremap // y/<C-r>"<CR>
 
+" 上下移动整行或选中的行
+map N ddp
+map P ddkkp
+" 只能逐行移动，作用不大
+"vmap N dp
+"vmap P dkkp
+
 " 引入插件
 call plug#begin('~/.config/nvim/plugged')
 
