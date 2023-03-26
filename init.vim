@@ -80,7 +80,7 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " 设置 ruby 路径
-let g:ruby_host_prog = '/usr/local/lib/ruby/gems/2.7.0/bin/neovim-ruby-host'
+"let g:ruby_host_prog = '/usr/local/lib/ruby/gems/2.7.0/bin/neovim-ruby-host'
 " 总是显示状态行
 set laststatus=2
 " 设置上下 5 行的距离
@@ -214,9 +214,10 @@ Plug 'ybian/smartim'
 " 嵌套括号高亮
 Plug 'luochen1990/rainbow'
 " 运行代码片段
-Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+Plug 'michaelb/sniprun', {'do': 'bash install.sh 1'}
 " 打印变量
 Plug 'meain/vim-printer'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -564,6 +565,12 @@ map <LEADER>rc <Plug>SnipClose
 let g:vim_printer_print_below_keybinding = '<LEADER>p'
 let g:vim_printer_print_above_keybinding = '<LEADER>P'
 
-" 设置 ruby 和 perl 语言的支持
-let g:ruby_host_prog = "/usr/local/lib/ruby/gems/3.1.0/bin/neovim-ruby-host"
-"let g:loaded_perl_provider = 0
+" 设置 perl 语言的支持
+let g:loaded_perl_provider = 0
+
+" vscode
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary neovim
+endif
