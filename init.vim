@@ -46,7 +46,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 " 自动读取文件被外部修改的内容
 set autoread
 " 允许使用鼠标定位
-" set mouse=a
+set mouse=a
 " 取消VI兼容
 set nocompatible
 " 打开文件类型检测功能
@@ -194,7 +194,7 @@ Plug 'ianding1/leetcode.vim'
 " rnvimr
 Plug 'kevinhwang91/rnvimr'
 " coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " wild-fire
 Plug 'gcmt/wildfire.vim'
 " vim-surround
@@ -217,7 +217,7 @@ Plug 'luochen1990/rainbow'
 Plug 'michaelb/sniprun', {'do': 'bash install.sh 1'}
 " 打印变量
 Plug 'meain/vim-printer'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -278,108 +278,108 @@ let g:airline_theme                             = 'simple'
 " ===
 " === coc.nvim
 " ===
-let g:coc_global_extensions = [
-  \ 'coc-json',
-  \ 'coc-vimlsp',
-  \ 'coc-tsserver',
-  \ 'coc-css',
-  \ 'coc-html',
-  \ 'coc-actions',
-  \ 'coc-diagnostic',
-  \ 'coc-prettier',
-  \ 'coc-syntax',
-  \ 'coc-yaml',
-  \ 'coc-snippets',
-  \ 'coc-translator',
-  \ 'coc-marketplace',
-  \ 'coc-markdownlint',
-  \ 'coc-pairs',
-  \ 'coc-highlight',
-  \ 'coc-tabnine']
+"let g:coc_global_extensions = [
+"  \ 'coc-json',
+"  \ 'coc-vimlsp',
+"  \ 'coc-tsserver',
+"  \ 'coc-css',
+"  \ 'coc-html',
+"  \ 'coc-actions',
+"  \ 'coc-diagnostic',
+"  \ 'coc-prettier',
+"  \ 'coc-syntax',
+"  \ 'coc-yaml',
+"  \ 'coc-snippets',
+"  \ 'coc-translator',
+"  \ 'coc-marketplace',
+"  \ 'coc-markdownlint',
+"  \ 'coc-pairs',
+"  \ 'coc-highlight',
+"  \ 'coc-tabnine']
 " 让 coc 在 neovim 启动后 500ms 再启动
-let g:coc_start_at_startup=0
-function! CocTimerStart(timer)
-    exec "CocStart"
-endfunction
-call timer_start(500,'CocTimerStart',{'repeat':1})
+"let g:coc_start_at_startup=0
+"function! CocTimerStart(timer)
+"    exec "CocStart"
+"endfunction
+"call timer_start(500,'CocTimerStart',{'repeat':1})
 "解决coc.nvim大文件卡死状况
-let g:trigger_size = 0.5 * 1048576
-
-augroup hugefile
-  autocmd!
-  autocmd BufReadPre *
-        \ let size = getfsize(expand('<afile>')) |
-        \ if (size > g:trigger_size) || (size == -2) |
-        \   echohl WarningMsg | echomsg 'WARNING: altering options for this huge file!' | echohl None |
-        \   exec 'CocDisable' |
-        \ else |
-        \   exec 'CocEnable' |
-        \ endif |
-        \ unlet size
-augroup END
+"let g:trigger_size = 0.5 * 1048576
+"
+"augroup hugefile
+"  autocmd!
+"  autocmd BufReadPre *
+"        \ let size = getfsize(expand('<afile>')) |
+"        \ if (size > g:trigger_size) || (size == -2) |
+"        \   echohl WarningMsg | echomsg 'WARNING: altering options for this huge file!' | echohl None |
+"        \   exec 'CocDisable' |
+"        \ else |
+"        \   exec 'CocEnable' |
+"        \ endif |
+"        \ unlet size
+"augroup END
 " 使用 tab 选择补全
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " 触发 coc 补全
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 " 使用 enter 选中补全
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use `<space>-` and `<space>+` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
-nmap <silent> <LEADER>+ <Plug>(coc-diagnostic-next)
+"nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
+"nmap <silent> <LEADER>+ <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 " Use <space>h to show documentation in preview window.
-nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+"nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
+"function! s:show_documentation()
+"  if (index(['vim','help'], &filetype) >= 0)
+"    execute 'h '.expand('<cword>')
+"  elseif (coc#rpc#ready())
+"    call CocActionAsync('doHover')
+"  else
+"    execute '!' . &keywordprg . " " . expand('<cword>')
+"  endif
+"endfunction
 " Highlight the symbol and its references when holding the cursor. not worked
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
-function! s:cocActionOpenFromSeleted(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' .visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionOpenFromSeleted<CR>g@
+"function! s:cocActionOpenFromSeleted(type) abort
+"  execute 'CocCommand actions.open ' . a:type
+"endfunction
+"xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' .visualmode()<CR>
+"nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionOpenFromSeleted<CR>g@
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " coc translator
-nnoremap <LEADER>t :CocCommand translator.popup<CR>
+"nnoremap <LEADER>t :CocCommand translator.popup<CR>
 " snippets
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-e> <Plug>(coc-snippets-select)
-let g:coc_snippet_next = '<C-n>'
-let g:coc_snippet_prev = '<C-p>'
-imap <C-e> <Plug>(coc-snippets-expand-jump)
-let g:snips_author = 'liufan'
+"imap <C-l> <Plug>(coc-snippets-expand)
+"vmap <C-e> <Plug>(coc-snippets-select)
+"let g:coc_snippet_next = '<C-n>'
+"let g:coc_snippet_prev = '<C-p>'
+"imap <C-e> <Plug>(coc-snippets-expand-jump)
+"let g:snips_author = 'liufan'
 
 " ===
 " === rnvimr
